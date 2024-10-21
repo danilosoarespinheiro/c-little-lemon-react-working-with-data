@@ -1,5 +1,5 @@
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
-import { pSalmon, pSalmonPressed, pGreen, bH, white } from "../cssVariables";
+import { pSalmon, pSalmonPressed, bH, white } from "../cssVariables";
 
 const styles = StyleSheet.create({
   filtersContainer: {

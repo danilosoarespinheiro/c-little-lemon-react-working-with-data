@@ -1,4 +1,12 @@
 import { useEffect, useState, useCallback, useMemo } from "react";
+import { Searchbar } from "react-native-paper";
+import { sections } from "./constants";
+import { fetchData } from "./services/api";
+import debounce from "lodash.debounce";
+import { getSectionListData } from "./utils/getSectionListData";
+import { useUpdateEffect } from "./hooks/useUpdateEffect";
+import Filters from "./components/Filters";
+
 import {
   StyleSheet,
   StatusBar,
@@ -9,18 +17,12 @@ import {
   ActivityIndicator,
   Alert,
 } from "react-native";
-import { Searchbar } from "react-native-paper";
-import {
-  bgColour,
-  pGreen,
+
+import {  pGreen,
   pSalmon,
   wH,
-  wP,
-  bP,
-  sSalmon,
-  highlight,
+  wP
 } from "./cssVariables";
-import { sections } from "./constants";
 
 import {
   createTable,
@@ -29,49 +31,7 @@ import {
   filterByQueryAndCategories,
   deleteAllMenuItems,
 } from "./services/db";
-import { fetchData } from "./services/api";
 
-import debounce from "lodash.debounce";
-import { getSectionListData } from "./utils/getSectionListData";
-import { useUpdateEffect } from "./hooks/useUpdateEffect";
-
-import Filters from "./components/Filters";
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: StatusBar.currentHeight,
-    backgroundColor: '#495E57',
-  },
-  sectionList: {
-    paddingHorizontal: 16,
-  },
-  searchBar: {
-    marginBottom: 24,
-    backgroundColor: '#495E57',
-    shadowRadius: 0,
-    shadowOpacity: 0,
-  },
-  item: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 16,
-  },
-  header: {
-    fontSize: 24,
-    paddingVertical: 8,
-    color: '#FBDABB',
-    backgroundColor: '#495E57',
-  },
-  title: {
-    fontSize: 20,
-    color: 'white',
-  },
-  id: {
-    display: 'none'
-  },
-});
 StatusBar.setBarStyle("light-content");
 StatusBar.setBackgroundColor(pGreen);
 
@@ -192,3 +152,39 @@ const Item = ({ title, price }) => (
     <Text style={styles.title}>${price}</Text>
   </View>
 );
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: StatusBar.currentHeight,
+    backgroundColor: '#495E57',
+  },
+  sectionList: {
+    paddingHorizontal: 16,
+  },
+  searchBar: {
+    marginBottom: 24,
+    backgroundColor: '#495E57',
+    shadowRadius: 0,
+    shadowOpacity: 0,
+  },
+  item: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 16,
+  },
+  header: {
+    fontSize: 24,
+    paddingVertical: 8,
+    color: '#FBDABB',
+    backgroundColor: '#495E57',
+  },
+  title: {
+    fontSize: 20,
+    color: 'white',
+  },
+  id: {
+    display: 'none'
+  },
+});
